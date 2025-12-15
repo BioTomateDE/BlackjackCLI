@@ -10,5 +10,5 @@ keywords = ["blackjack", "gambling", "tui"]
 categories = ["games"]
 
 [dependencies]
-colored = "3.0.0"
 rand = "0.9.1"
+colored-print = { git = "https://github.com/BioTomateDE/ColoredPrint" }

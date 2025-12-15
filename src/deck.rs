@@ -1,6 +1,26 @@
+use rand::rng;
+use rand::seq::SliceRandom as _;
+
 use crate::card::Card;
 use crate::card::CardColor::*;
 use crate::card::CardNumber::*;
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Deck(Vec<Card>);
+impl Deck {
+    /// Generates a new 52 card deck and shuffles it.
+    pub fn new() -> Self {
+        let mut deck: Vec<Card> = DECK.to_vec();
+        deck.shuffle(&mut rng());
+        Self(deck)
+    }
+
+    /// Pops the last card off the deck and returns it.
+    /// This function will panic if the deck is empty.
+    pub fn pop_card(&mut self) -> Card {
+        self.0.pop().expect("Deck is empty")
+    }
+}
 
 pub const DECK: [Card; 52] = [
     // Diamonds
