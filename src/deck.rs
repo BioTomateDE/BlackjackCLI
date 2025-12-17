@@ -2,8 +2,8 @@ use rand::rng;
 use rand::seq::SliceRandom as _;
 
 use crate::card::Card;
-use crate::card::CardColor::*;
 use crate::card::CardNumber::*;
+use crate::card::CardSuit::*;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Deck(Vec<Card>);

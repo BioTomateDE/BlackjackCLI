@@ -54,7 +54,7 @@ impl Display for Hand {
             if i > 0 {
                 write!(f, ", ")?;
             }
-            write!(f, "{}", card)?;
+            write!(f, "{card}")?;
         }
 
         write!(f, "]")

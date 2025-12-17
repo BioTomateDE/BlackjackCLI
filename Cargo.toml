@@ -1,14 +1,16 @@
 [package]
 name = "blackjack"
-version = "1.2.0"
+version = "1.2.1"
+authors = ["BioTomateDE <latuskati+cratesio@gmail.com>"]
 edition = "2024"
-description = "A basic singleplayer Blackjack TUI"
+rust-version = "1.85.1"
+description = "A basic singleplayer Blackjack CLI"
 readme = "README.md"
 repository = "https://github.com/BioTomateDE/rust-blackjack"
 license = "GPL-3"
-keywords = ["blackjack", "gambling", "tui"]
-categories = ["games"]
+keywords = ["blackjack", "gambling", "cli", "games"]
+categories = ["games", "command-line-utilities"]
 
 [dependencies]
 rand = "0.9.1"
-colored-print = { git = "https://github.com/BioTomateDE/ColoredPrint" }
+colored-print = "0.1.1"

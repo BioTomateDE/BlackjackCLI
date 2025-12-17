@@ -1,7 +1,7 @@
-use colored_print::*;
+use colored_print::{ceprint, cprintln};
 use rand::{Rng, rng};
-use std::io;
 use std::io::Write;
+use std::io::{self, BufRead as _};
 
 pub fn get_string_input(prompt: &str) -> String {
     ceprint!("%C:{prompt} > ");
@@ -42,4 +42,11 @@ fn try_get_bet(balance: u64) -> Result<u64, &'static str> {
         return Err("You must at least bet 2$!");
     }
     Ok(bet)
+}
+
+pub fn press_enter() {
+    std::io::stdin()
+        .lock()
+        .read_line(&mut String::new())
+        .unwrap();
 }

@@ -4,7 +4,7 @@ version = 4
 
 [[package]]
 name = "blackjack"
-version = "1.2.0"
+version = "1.2.1"
 dependencies = [
  "colored-print",
  "rand",
@@ -18,8 +18,9 @@ checksum = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
 
 [[package]]
 name = "colored-print"
-version = "0.1.0"
-source = "git+https://github.com/BioTomateDE/ColoredPrint#b9946ab23fa76f119aa1d4b00636c2086b9feb6a"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "654f05b5b474d76ec51b5c42c2465172d453fe04dbaabf6c35a9a8ba6de69b53"
 dependencies = [
  "quote",
  "syn",

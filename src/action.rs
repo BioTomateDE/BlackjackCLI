@@ -1,6 +1,6 @@
 use colored_print::cprintln;
 
-use crate::io::get_string_input;
+use crate::input::get_string_input;
 
 pub enum Action {
     Stand,

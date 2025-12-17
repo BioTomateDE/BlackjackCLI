@@ -1,19 +1,26 @@
+#![warn(clippy::correctness)]
+#![warn(clippy::suspicious)]
+#![warn(clippy::perf)]
+#![warn(clippy::complexity)]
+#![warn(clippy::cargo)]
+#![warn(clippy::style)]
+#![warn(clippy::nursery)]
+
 mod action;
 mod card;
 mod deck;
 mod flavor;
 mod hand;
-mod io;
+mod input;
 mod sleep;
 
-use crate::action::Action;
-use crate::deck::Deck;
-use crate::hand::Hand;
-use crate::io::get_bet;
-use crate::sleep::sleep_ms;
-use colored_print::*;
+use action::Action;
+use colored_print::cprintln;
+use deck::Deck;
+use hand::Hand;
+use input::{get_bet, press_enter};
+use sleep::sleep_ms;
 use std::cmp::Ordering;
-use std::io::BufRead;
 
 /// Returns the money gained (can be negative if lost).
 fn play(mut bet: u64) -> i64 {
@@ -28,9 +35,9 @@ fn play(mut bet: u64) -> i64 {
 
     // Player Blackjack; 3/2 payout.
     if player_cards.sum() == 21 {
-        let payout: i64 = bet as i64 * 3 / 2;
+        let payout = bet * 3 / 2;
         cprintln!("You won %b^{payout}%_^$ by getting a blackjack!");
-        return payout;
+        return payout as i64;
     }
 
     // Dealer Blackjack.
@@ -135,10 +142,7 @@ fn main() {
             break;
         }
         cprintln!("%b^%w:[Press ENTER to restart]");
-        std::io::stdin()
-            .lock()
-            .read_line(&mut String::new())
-            .unwrap();
+        press_enter();
     }
 
     sleep_ms(723);
