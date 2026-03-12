@@ -1,9 +1,8 @@
-use std::fmt::{Display, Formatter};
-
 use colored_print::cformat;
+use std::fmt;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum CardNumber {
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Hash)]
+pub enum Rank {
     Two,
     Three,
     Four,
@@ -19,7 +18,8 @@ pub enum CardNumber {
     Ace,
 }
 
-impl CardNumber {
+impl Rank {
+    /// How much this card rank is worth.
     #[must_use]
     pub const fn value(self) -> u8 {
         match self {
@@ -35,11 +35,14 @@ impl CardNumber {
             Self::Ace => 11,
         }
     }
-}
 
-impl Display for CardNumber {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        let string: &str = match self {
+    /// The "name" of this card rank.
+    ///
+    /// This will be a number for most suits,
+    /// except for Jack, Queen, King and Ace.
+    #[must_use]
+    pub const fn name(self) -> &'static str {
+        match self {
             Self::Two => "2",
             Self::Three => "3",
             Self::Four => "4",
@@ -53,41 +56,46 @@ impl Display for CardNumber {
             Self::Queen => "Queen",
             Self::King => "King",
             Self::Ace => "Ace",
-        };
-        write!(f, "{string}")
+        }
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum CardSuit {
+impl fmt::Display for Rank {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.write_str(self.name())
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum Suit {
     Diamonds,
     Hearts,
     Spades,
     Clubs,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct Card {
-    pub number: CardNumber,
-    suit: CardSuit,
+    pub number: Rank,
+    pub suit: Suit,
 }
 
 impl Card {
     #[must_use]
-    pub const fn new(number: CardNumber, suit: CardSuit) -> Self {
+    pub const fn new(number: Rank, suit: Suit) -> Self {
         Self { number, suit }
     }
 }
 
-impl Display for Card {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+impl fmt::Display for Card {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let n = self.number;
         let string = match self.suit {
-            CardSuit::Diamonds => cformat!("%R:♦ {n}"),
-            CardSuit::Hearts => cformat!("%R:♥ {n}"),
-            CardSuit::Spades => cformat!("%W:♠ {n}"),
-            CardSuit::Clubs => cformat!("%W:♣ {n}"),
+            Suit::Diamonds => cformat!("%R:♦ {n}"),
+            Suit::Hearts => cformat!("%R:♥ {n}"),
+            Suit::Spades => cformat!("%W:♠ {n}"),
+            Suit::Clubs => cformat!("%W:♣ {n}"),
         };
-        write!(f, "{string}")
+        f.write_str(&string)
     }
 }

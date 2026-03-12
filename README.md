@@ -1,4 +1,7 @@
+# Blackjack CLI
+
 ## Usage Guide (Windows)
+
 1. On the right side, click on **Releases**.
 2. Download the latest release `.exe` file.
 3. Press `Win + R`.
@@ -7,12 +10,14 @@
 6. Type `./blackjack` and hit enter.
 
 ## Usage Guide (Linux)
+
 1. On the right side, click on **Releases**.
 2. Download the latest release binary.
 3. Open a terminal emulator and navigate to the downloaded file's directory.
 4. Run the binary: `./blackjack`.
 
 ## How to download (other platforms)
+
 1. Open a command prompt and navigate to some temporary folder.
 2. Clone this repository: `git clone https://github.com/BioTomateDE/rust-blackjack`.
 3. Navigate into the cloned repository: `cd ./rust-blackjack`.
@@ -22,13 +27,15 @@
 7. Run the built program.
 
 ## Options
+
 You can set the `BJ_SLEEP` environment variable to `disabled`
 if you want to disable the sleeps between actions.
 
-This is also achievable by running the binary with 
-the `nosleep` flag (literally just `./blackjack nosleep`).
+You can supply the `nosleep` flag via the commandline
+to disable all sleeping (literally just `./blackjack nosleep`).
 
 For betting amount inputs, you can input one of the following:
+
 - a number of dollars.
 - `all` to bet all of your money.
 - `half` to bet half of your money (rounded down if not even).

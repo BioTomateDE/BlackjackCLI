@@ -1,7 +1,7 @@
+use crate::input::get_string_input;
 use colored_print::cprintln;
 
-use crate::input::get_string_input;
-
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum Action {
     Stand,
     Hit,
@@ -17,14 +17,24 @@ impl Action {
                 "Choose an action: [S]tand · [H]it"
             };
 
-            let input: String = get_string_input(prompt);
-            match input.to_ascii_lowercase().as_str() {
-                "s" => return Self::Stand,
-                "h" => return Self::Hit,
-                "d" if double_allowed => return Self::Double,
-                "d" => cprintln!("%R:Doubling down is not allowed here!"),
-                _ => cprintln!("%R:Invalid action input!"),
+            let input: String = get_string_input(prompt).to_ascii_lowercase();
+            let action: Self = match input.as_str() {
+                "s" | "stand" => Self::Stand,
+                "h" | "hit" => Self::Hit,
+                "d" | "double" => Self::Double,
+                "" => continue,
+                _ => {
+                    cprintln!("%R:Invalid action input!");
+                    continue;
+                }
+            };
+
+            if action == Self::Double && !double_allowed {
+                cprintln!("%R:Doubling down is not allowed here!");
+                continue;
             }
+
+            break action;
         }
     }
 }

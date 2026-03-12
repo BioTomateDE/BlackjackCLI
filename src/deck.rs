@@ -1,12 +1,10 @@
-use rand::rng;
-use rand::seq::SliceRandom as _;
+use rand::{rng, seq::SliceRandom};
 
 use crate::card::Card;
-use crate::card::CardNumber::*;
-use crate::card::CardSuit::*;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Deck(Vec<Card>);
+
 impl Deck {
     /// Generates a new 52 card deck and shuffles it.
     pub fn new() -> Self {
@@ -22,61 +20,68 @@ impl Deck {
     }
 }
 
-pub const DECK: [Card; 52] = [
-    // Diamonds
-    Card::new(Two, Diamonds),
-    Card::new(Three, Diamonds),
-    Card::new(Four, Diamonds),
-    Card::new(Five, Diamonds),
-    Card::new(Six, Diamonds),
-    Card::new(Seven, Diamonds),
-    Card::new(Eight, Diamonds),
-    Card::new(Nine, Diamonds),
-    Card::new(Ten, Diamonds),
-    Card::new(Jack, Diamonds),
-    Card::new(Queen, Diamonds),
-    Card::new(King, Diamonds),
-    Card::new(Ace, Diamonds),
-    // Hearts
-    Card::new(Two, Hearts),
-    Card::new(Three, Hearts),
-    Card::new(Four, Hearts),
-    Card::new(Five, Hearts),
-    Card::new(Six, Hearts),
-    Card::new(Seven, Hearts),
-    Card::new(Eight, Hearts),
-    Card::new(Nine, Hearts),
-    Card::new(Ten, Hearts),
-    Card::new(Jack, Hearts),
-    Card::new(Queen, Hearts),
-    Card::new(King, Hearts),
-    Card::new(Ace, Hearts),
-    // Spades
-    Card::new(Two, Spades),
-    Card::new(Three, Spades),
-    Card::new(Four, Spades),
-    Card::new(Five, Spades),
-    Card::new(Six, Spades),
-    Card::new(Seven, Spades),
-    Card::new(Eight, Spades),
-    Card::new(Nine, Spades),
-    Card::new(Ten, Spades),
-    Card::new(Jack, Spades),
-    Card::new(Queen, Spades),
-    Card::new(King, Spades),
-    Card::new(Ace, Spades),
-    // Clubs
-    Card::new(Two, Clubs),
-    Card::new(Three, Clubs),
-    Card::new(Four, Clubs),
-    Card::new(Five, Clubs),
-    Card::new(Six, Clubs),
-    Card::new(Seven, Clubs),
-    Card::new(Eight, Clubs),
-    Card::new(Nine, Clubs),
-    Card::new(Ten, Clubs),
-    Card::new(Jack, Clubs),
-    Card::new(Queen, Clubs),
-    Card::new(King, Clubs),
-    Card::new(Ace, Clubs),
-];
+pub const DECK: [Card; 52] = all_cards();
+
+const fn all_cards() -> [Card; 52] {
+    #[allow(clippy::enum_glob_use)]
+    use crate::card::{Rank::*, Suit::*};
+
+    [
+        // Diamonds
+        Card::new(Two, Diamonds),
+        Card::new(Three, Diamonds),
+        Card::new(Four, Diamonds),
+        Card::new(Five, Diamonds),
+        Card::new(Six, Diamonds),
+        Card::new(Seven, Diamonds),
+        Card::new(Eight, Diamonds),
+        Card::new(Nine, Diamonds),
+        Card::new(Ten, Diamonds),
+        Card::new(Jack, Diamonds),
+        Card::new(Queen, Diamonds),
+        Card::new(King, Diamonds),
+        Card::new(Ace, Diamonds),
+        // Hearts
+        Card::new(Two, Hearts),
+        Card::new(Three, Hearts),
+        Card::new(Four, Hearts),
+        Card::new(Five, Hearts),
+        Card::new(Six, Hearts),
+        Card::new(Seven, Hearts),
+        Card::new(Eight, Hearts),
+        Card::new(Nine, Hearts),
+        Card::new(Ten, Hearts),
+        Card::new(Jack, Hearts),
+        Card::new(Queen, Hearts),
+        Card::new(King, Hearts),
+        Card::new(Ace, Hearts),
+        // Spades
+        Card::new(Two, Spades),
+        Card::new(Three, Spades),
+        Card::new(Four, Spades),
+        Card::new(Five, Spades),
+        Card::new(Six, Spades),
+        Card::new(Seven, Spades),
+        Card::new(Eight, Spades),
+        Card::new(Nine, Spades),
+        Card::new(Ten, Spades),
+        Card::new(Jack, Spades),
+        Card::new(Queen, Spades),
+        Card::new(King, Spades),
+        Card::new(Ace, Spades),
+        // Clubs
+        Card::new(Two, Clubs),
+        Card::new(Three, Clubs),
+        Card::new(Four, Clubs),
+        Card::new(Five, Clubs),
+        Card::new(Six, Clubs),
+        Card::new(Seven, Clubs),
+        Card::new(Eight, Clubs),
+        Card::new(Nine, Clubs),
+        Card::new(Ten, Clubs),
+        Card::new(Jack, Clubs),
+        Card::new(Queen, Clubs),
+        Card::new(King, Clubs),
+        Card::new(Ace, Clubs),
+    ]
+}

@@ -1,5 +1,5 @@
 use colored_print::{ceprint, cprintln};
-use rand::{Rng, rng};
+use rand::{RngExt, rng};
 use std::io::Write;
 use std::io::{self, BufRead as _};
 
@@ -15,7 +15,7 @@ pub fn get_string_input(prompt: &str) -> String {
     buffer.trim().to_string()
 }
 
-pub fn get_bet(balance: u64) -> u64 {
+pub fn get_bet(balance: i64) -> i64 {
     loop {
         match try_get_bet(balance) {
             Ok(bet) => return bet,
@@ -24,11 +24,13 @@ pub fn get_bet(balance: u64) -> u64 {
     }
 }
 
-fn try_get_bet(balance: u64) -> Result<u64, &'static str> {
-    let input: String = get_string_input("Choose your bet");
-    let bet: u64 = match input.as_str() {
-        "half" => balance / 2,
-        "all" => balance,
+fn try_get_bet(balance: i64) -> Result<i64, &'static str> {
+    debug_assert!(balance > 1);
+
+    let input: String = get_string_input("Choose your bet").to_ascii_lowercase();
+    let bet: i64 = match input.as_str() {
+        "h" | "half" => balance / 2,
+        "a" | "all" => balance,
         "idk" => rng().random_range(2..=balance),
         _ => input
             .parse()
@@ -45,8 +47,5 @@ fn try_get_bet(balance: u64) -> Result<u64, &'static str> {
 }
 
 pub fn press_enter() {
-    std::io::stdin()
-        .lock()
-        .read_line(&mut String::new())
-        .unwrap();
+    io::stdin().lock().read_line(&mut String::new()).unwrap();
 }
