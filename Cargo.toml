@@ -1,19 +1,19 @@
 [package]
 name = "blackjack"
-version = "1.3.0"
-authors = ["BioTomateDE <latuskati+cratesio@gmail.com>"]
+version = "1.3.1"
+authors = ["BioTomateDE <biotomatede@proton.me>"]
 edition = "2024"
 description = "A basic singleplayer Blackjack CLI"
 readme = "README.md"
-repository = "https://github.com/BioTomateDE/rust-blackjack"
+repository = "https://github.com/BioTomateDE/BlackJackCLI"
 license = "GPL-3.0-or-later"
 keywords = ["blackjack", "gambling", "cli", "games"]
 categories = ["games", "command-line-utilities"]
 
 [dependencies.colored-print]
-version = "0.1.2"
+version = "1.0"
 
 [dependencies.rand]
-version = "0.10.0"
+version = "0.10"
 default-features = false
 features = ["thread_rng"]

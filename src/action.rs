@@ -9,6 +9,7 @@ pub enum Action {
 }
 
 impl Action {
+    #[must_use]
     pub fn get_input(double_allowed: bool) -> Self {
         loop {
             let prompt: &str = if double_allowed {

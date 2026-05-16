@@ -1,5 +1,6 @@
-#![warn(clippy::nursery)]
-#![warn(clippy::pedantic)]
+#![forbid(unsafe_code)]
+#![warn(clippy::nursery, clippy::pedantic, clippy::cargo)]
+#![allow(clippy::multiple_crate_versions)]
 
 use crate::game::Game;
 use crate::input::{get_bet, press_enter};

@@ -58,11 +58,31 @@ impl Rank {
             Self::Ace => "Ace",
         }
     }
+
+    /// An array of all ranks.
+    #[must_use]
+    pub const fn all() -> [Self; 13] {
+        [
+            Self::Two,
+            Self::Three,
+            Self::Four,
+            Self::Five,
+            Self::Six,
+            Self::Seven,
+            Self::Eight,
+            Self::Nine,
+            Self::Ten,
+            Self::Jack,
+            Self::Queen,
+            Self::King,
+            Self::Ace,
+        ]
+    }
 }
 
 impl fmt::Display for Rank {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.write_str(self.name())
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        f.pad(self.name())
     }
 }
 
@@ -74,27 +94,35 @@ pub enum Suit {
     Clubs,
 }
 
+impl Suit {
+    /// An array of all suits.
+    #[must_use]
+    pub const fn all() -> [Self; 4] {
+        [Self::Diamonds, Self::Hearts, Self::Spades, Self::Clubs]
+    }
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct Card {
-    pub number: Rank,
+    pub rank: Rank,
     pub suit: Suit,
 }
 
 impl Card {
     #[must_use]
-    pub const fn new(number: Rank, suit: Suit) -> Self {
-        Self { number, suit }
+    pub const fn new(rank: Rank, suit: Suit) -> Self {
+        Self { rank, suit }
     }
 }
 
 impl fmt::Display for Card {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let n = self.number;
+        let r = self.rank;
         let string = match self.suit {
-            Suit::Diamonds => cformat!("%R:♦ {n}"),
-            Suit::Hearts => cformat!("%R:♥ {n}"),
-            Suit::Spades => cformat!("%W:♠ {n}"),
-            Suit::Clubs => cformat!("%W:♣ {n}"),
+            Suit::Diamonds => cformat!("%R:♦ {r}"),
+            Suit::Hearts => cformat!("%R:♥ {r}"),
+            Suit::Spades => cformat!("%W:♠ {r}"),
+            Suit::Clubs => cformat!("%W:♣ {r}"),
         };
         f.write_str(&string)
     }

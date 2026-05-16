@@ -31,7 +31,7 @@ fn try_get_bet(balance: i64) -> Result<i64, &'static str> {
     let bet: i64 = match input.as_str() {
         "h" | "half" => balance / 2,
         "a" | "all" => balance,
-        "idk" => rng().random_range(2..=balance),
+        "idk" | "rand" | "random" => rng().random_range(1..=balance / 2) * 2,
         _ => input
             .parse()
             .map_err(|_| "Please provide a valid number!")?,

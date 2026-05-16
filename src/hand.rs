@@ -65,10 +65,10 @@ impl Hand {
     pub fn sum(&self) -> u8 {
         let mut sum: u8 = 0;
         for card in &self.cards {
-            if card.number == Rank::Ace && sum >= 11 {
+            if card.rank == Rank::Ace && sum >= 11 {
                 sum += 1;
             } else {
-                sum += card.number.value();
+                sum += card.rank.value();
             }
         }
         sum
